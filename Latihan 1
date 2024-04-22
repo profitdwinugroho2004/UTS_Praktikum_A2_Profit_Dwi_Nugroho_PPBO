@@ -1,0 +1,28 @@
+def mil_ke_kilometer(mil):
+    # 1 mil = 250.000 kilometer
+    return mil * 250.000
+
+def main():
+    print("Program Konversi Mil ke Kilometer")
+    print("---------------------------------")
+    
+    while True:
+        try:
+            # Meminta input dari pengguna
+            input_mil = float(input("Masukkan jarak dalam mil (atau masukkan 0 untuk keluar): "))
+            
+            if input_mil == 0:
+                print("Terima kasih telah menggunakan program.")
+                break
+            
+            # Memanggil fungsi untuk mengkonversi mil ke kilometer
+            hasil_kilometer = mil_ke_kilometer(input_mil)
+            
+            # Menampilkan hasil konversi
+            print(f"{input_mil} mil = {hasil_kilometer:.2f} kilometer\n")
+        
+        except ValueError:
+            print("Masukkan yang Anda berikan bukan angka yang valid. Silakan coba lagi.\n")
+
+if __name__ == "__main__":
+    main()
