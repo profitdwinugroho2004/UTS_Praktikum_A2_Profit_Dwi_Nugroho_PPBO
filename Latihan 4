@@ -1,35 +1,24 @@
-def create_rekening(nama, no_rekening):
-    return {
-        "nama": nama,
-        "no_rekening": no_rekening,
-        "saldo": 0
-    }
+class Rekening:
+    def __init__(self, nama, no_rekening, saldo):
+        self.nama = nama
+        self.no_rekening = no_rekening
+        self.saldo = saldo
 
-def get_saldo(rekening):
-    return rekening["saldo"]
+    def __str__(self):
+        return f"Nama: {self.nama}\nNo. Rekening: {self.no_rekening}\nSaldo: Rp {self.saldo:,.2f}"
 
-def set_saldo(rekening, nilai):
-    if nilai < 0:
-        raise ValueError("Saldo tidak boleh negatif")
-    rekening["saldo"] = nilai
+class Nasabah(Rekening):
+    def tampilkan_data_nasabah(self):
+        print("Data Nasabah")
+        print(self)
 
-def tampilkan_data_nasabah(rekening):
-    print(f"Nama: {rekening['nama']}")
-    print(f"No. Rekening: {rekening['no_rekening']}")
-    print(f"Saldo: {rekening['saldo']}")
+# Membuat objek Nasabah 1
+nasabah1 = Nasabah("Budi", 5555, 500000)
 
-# Buat object Nasabah 1
-nasabah1 = create_rekening("Budi", 5555)
-set_saldo(nasabah1, 500000)
+# Membuat objek Nasabah 2
+nasabah2 = Nasabah("Wati", 6666, 2000000)
 
-# Buat object Nasabah 2
-nasabah2 = create_rekening("Wati", 6666)
-set_saldo(nasabah2, 2000000)
-
-# Tampilkan data Nasabah 1
-tampilkan_data_nasabah(nasabah1)
-
-print("\n")  # Menambahkan baris kosong untuk memisahkan output
-
-# Tampilkan data Nasabah 2
-tampilkan_data_nasabah(nasabah2)
+# Memanggil method untuk menampilkan data nasabah
+nasabah1.tampilkan_data_nasabah()
+print()  # Spasi antara output Nasabah 1 dan Nasabah 2
+nasabah2.tampilkan_data_nasabah()
