@@ -1,11 +1,11 @@
 class Rekening:
-    def __init__(self, nama, no_rekening, saldo=0):
+    def __init__(self, nama, no_rekening, saldo):
         self.nama = nama
         self.no_rekening = no_rekening
         self.saldo = saldo
 
     def __str__(self):
-        return f"Nama: {self.nama}\nNo. Rekening: {self.no_rekening}\nSaldo: {self.saldo}"
+        return f"Nama: {self.nama}\nNo. Rekening: {self.no_rekening}\nSaldo: Rp {self.saldo:,.2f}"
 
     def setor_tunai(self, jumlah):
         if jumlah <= 0:
@@ -24,41 +24,52 @@ class Rekening:
             raise ValueError("Nominal transfer harus lebih dari 0")
         if self.saldo < jumlah:
             raise ValueError("Saldo tidak mencukupi untuk melakukan transfer")
-        
-        self.saldo -= jumlah
-        penerima.saldo += jumlah
-        
-        print(f"Transfer sebesar Rp {jumlah:,.2f} dari rekening {self.no_rekening} ({self.nama}) "
-              f"ke rekening {penerima.no_rekening} ({penerima.nama}) berhasil")
+        self.tarik_tunai(jumlah)  # Mengurangi saldo pengirim
+        penerima.setor_tunai(jumlah)  # Menambah saldo penerima
+        print(f"Transfer sebesar Rp {jumlah:,.2f} dari {self.nama} (5555) ke {penerima.nama} (6666) berhasil.")
+
+class Nasabah(Rekening):
+    def tampilkan_data_nasabah(self):
+        print("Data Nasabah")
+        print(self)
 
 # Membuat objek Nasabah 1
-nasabah1 = Rekening("Budi", 5555, 500000)
+nasabah1 = Nasabah("Budi", 5555, 500000)
 
 # Membuat objek Nasabah 2
-nasabah2 = Rekening("Wati", 6666, 2000000)
+nasabah2 = Nasabah("Wati", 6666, 2000000)
+
+# Memanggil method untuk menampilkan data nasabah sebelum transaksi
+print("Sebelum transaksi:")
+nasabah1.tampilkan_data_nasabah()
+print()  # Spasi antara output Nasabah 1 dan Nasabah 2
+nasabah2.tampilkan_data_nasabah()
+print()  # Spasi antara sebelum dan setelah transaksi
 
 # Simulasi transaksi ATM
-print("Sebelum transaksi:")
-print("Nasabah 1:")
-print(nasabah1)
-print()
-print("Nasabah 2:")
-print(nasabah2)
-print()
-
+print("Transaksi:")
 # Nasabah 1 setor tunai 1.000.000
 nasabah1.setor_tunai(1000000)
+print(f"Nasabah 1 melakukan setor tunai Rp 1,000,000")
 
 # Nasabah 2 tarik tunai 1.000.000
 nasabah2.tarik_tunai(1000000)
+print(f"Nasabah 2 melakukan tarik tunai Rp 1,000,000")
 
-# Transfer 500.000 dari Nasabah 1 ke Nasabah 2
-nasabah2.transfer(nasabah1, 250000)
+print()  # Spasi antara transaksi dan transfer
 
-# Setelah transaksi
-print("\nSetelah transaksi:")
-print("Nasabah 1:")
-print(nasabah1)
-print()
-print("Nasabah 2:")
-print(nasabah2)
+# Simulasi transaksi transfer
+print("Transaksi Transfer:")
+# Transfer dari Nasabah 1 ke Nasabah 2 sebesar 500.000
+nasabah1.transfer(nasabah2, 500000)
+print(f"Pengirim: {nasabah1.nama} (No. Rekening {nasabah1.no_rekening})")
+print(f"Penerima: {nasabah2.nama} (No. Rekening {nasabah2.no_rekening})")
+print(f"Nominal Transfer: Rp 500,000")
+
+print()  # Spasi antara transfer dan setelah transaksi
+
+# Memanggil method untuk menampilkan data nasabah setelah transaksi
+print("Setelah Transaksi:")
+nasabah1.tampilkan_data_nasabah()
+print()  # Spasi antara output Nasabah 1 dan Nasabah 2
+nasabah2.tampilkan_data_nasabah()
