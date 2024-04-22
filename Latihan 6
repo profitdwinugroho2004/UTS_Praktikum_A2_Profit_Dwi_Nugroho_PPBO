@@ -1,0 +1,64 @@
+class Rekening:
+    def __init__(self, nama, no_rekening, saldo=0):
+        self.nama = nama
+        self.no_rekening = no_rekening
+        self.saldo = saldo
+
+    def __str__(self):
+        return f"Nama: {self.nama}\nNo. Rekening: {self.no_rekening}\nSaldo: {self.saldo}"
+
+    def setor_tunai(self, jumlah):
+        if jumlah <= 0:
+            raise ValueError("Jumlah setoran tunai harus lebih dari 0")
+        self.saldo += jumlah
+
+    def tarik_tunai(self, jumlah):
+        if jumlah <= 0:
+            raise ValueError("Jumlah penarikan tunai harus lebih dari 0")
+        if self.saldo < jumlah:
+            raise ValueError("Saldo tidak mencukupi untuk melakukan penarikan")
+        self.saldo -= jumlah
+
+    def transfer(self, penerima, jumlah):
+        if jumlah <= 0:
+            raise ValueError("Nominal transfer harus lebih dari 0")
+        if self.saldo < jumlah:
+            raise ValueError("Saldo tidak mencukupi untuk melakukan transfer")
+        
+        self.saldo -= jumlah
+        penerima.saldo += jumlah
+        
+        print(f"Transfer sebesar Rp {jumlah:,.2f} dari rekening {self.no_rekening} ({self.nama}) "
+              f"ke rekening {penerima.no_rekening} ({penerima.nama}) berhasil")
+
+# Membuat objek Nasabah 1
+nasabah1 = Rekening("Budi", 5555, 500000)
+
+# Membuat objek Nasabah 2
+nasabah2 = Rekening("Wati", 6666, 2000000)
+
+# Simulasi transaksi ATM
+print("Sebelum transaksi:")
+print("Nasabah 1:")
+print(nasabah1)
+print()
+print("Nasabah 2:")
+print(nasabah2)
+print()
+
+# Nasabah 1 setor tunai 1.000.000
+nasabah1.setor_tunai(1000000)
+
+# Nasabah 2 tarik tunai 1.000.000
+nasabah2.tarik_tunai(1000000)
+
+# Transfer 500.000 dari Nasabah 1 ke Nasabah 2
+nasabah2.transfer(nasabah1, 250000)
+
+# Setelah transaksi
+print("\nSetelah transaksi:")
+print("Nasabah 1:")
+print(nasabah1)
+print()
+print("Nasabah 2:")
+print(nasabah2)
