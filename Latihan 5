@@ -21,9 +21,7 @@ class Rekening:
 
 class Nasabah(Rekening):
     def tampilkan_data_nasabah(self):
-        print("--------------------")
         print("Data Nasabah")
-        print("------------")
         print(self)
 
 # Membuat objek Nasabah 1
@@ -33,7 +31,6 @@ nasabah1 = Nasabah("Budi", 5555, 500000)
 nasabah2 = Nasabah("Wati", 6666, 2000000)
 
 # Memanggil method untuk menampilkan data nasabah sebelum transaksi
-print("--------------------")
 print("Sebelum transaksi:")
 nasabah1.tampilkan_data_nasabah()
 print()  # Spasi antara output Nasabah 1 dan Nasabah 2
@@ -41,9 +38,7 @@ nasabah2.tampilkan_data_nasabah()
 print()  # Spasi antara sebelum dan setelah transaksi
 
 # Simulasi transaksi ATM
-print("--------------------------------------------")
 print("Transaksi:")
-print("----------")
 # Nasabah 1 setor tunai 1.000.000
 nasabah1.setor_tunai(1000000)
 print(f"Nasabah 1 melakukan setor tunai Rp 1,000,000")
@@ -51,15 +46,11 @@ print(f"Nasabah 1 melakukan setor tunai Rp 1,000,000")
 # Nasabah 2 tarik tunai 1.000.000
 nasabah2.tarik_tunai(1000000)
 print(f"Nasabah 2 melakukan tarik tunai Rp 1,000,000")
-print("--------------------------------------------")
 
 print()  # Spasi antara transaksi dan setelah transaksi
 
 # Memanggil method untuk menampilkan data nasabah setelah transaksi
-print("----------------------")
 print("Setelah transaksi:")
 nasabah1.tampilkan_data_nasabah()
-print("----------------------")
 print()  # Spasi antara output Nasabah 1 dan Nasabah 2
 nasabah2.tampilkan_data_nasabah()
-print("----------------------")
