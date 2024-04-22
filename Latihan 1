@@ -1,3 +1,7 @@
+class KonversiMilKeKilometer:
+    def __init__(self):
+        pass
+
 def mil_ke_kilometer(mil):
     # 1 mil = 250.000 kilometer
     return mil * 250.000
