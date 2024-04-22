@@ -1,11 +1,11 @@
 class Rekening:
-    def __init__(self, nama, no_rekening, saldo=0):
+    def __init__(self, nama, no_rekening, saldo):
         self.nama = nama
         self.no_rekening = no_rekening
         self.saldo = saldo
 
     def __str__(self):
-        return f"Nama: {self.nama}\nNo. Rekening: {self.no_rekening}\nSaldo: {self.saldo}"
+        return f"Nama: {self.nama}\nNo. Rekening: {self.no_rekening}\nSaldo: Rp {self.saldo:,.2f}"
 
     def setor_tunai(self, jumlah):
         if jumlah <= 0:
@@ -19,32 +19,47 @@ class Rekening:
             raise ValueError("Saldo tidak mencukupi untuk melakukan penarikan")
         self.saldo -= jumlah
 
+class Nasabah(Rekening):
+    def tampilkan_data_nasabah(self):
+        print("--------------------")
+        print("Data Nasabah")
+        print("------------")
+        print(self)
 
 # Membuat objek Nasabah 1
-nasabah1 = Rekening("Budi", 5555, 500000)
+nasabah1 = Nasabah("Budi", 5555, 500000)
 
 # Membuat objek Nasabah 2
-nasabah2 = Rekening("Wati", 6666, 2000000)
+nasabah2 = Nasabah("Wati", 6666, 2000000)
+
+# Memanggil method untuk menampilkan data nasabah sebelum transaksi
+print("--------------------")
+print("Sebelum transaksi:")
+nasabah1.tampilkan_data_nasabah()
+print()  # Spasi antara output Nasabah 1 dan Nasabah 2
+nasabah2.tampilkan_data_nasabah()
+print()  # Spasi antara sebelum dan setelah transaksi
 
 # Simulasi transaksi ATM
-print("Sebelum transaksi:")
-print("Nasabah 1:")
-print(nasabah1)
-print()
-print("Nasabah 2:")
-print(nasabah2)
-print()
-
+print("--------------------------------------------")
+print("Transaksi:")
+print("----------")
 # Nasabah 1 setor tunai 1.000.000
 nasabah1.setor_tunai(1000000)
+print(f"Nasabah 1 melakukan setor tunai Rp 1,000,000")
 
 # Nasabah 2 tarik tunai 1.000.000
 nasabah2.tarik_tunai(1000000)
+print(f"Nasabah 2 melakukan tarik tunai Rp 1,000,000")
+print("--------------------------------------------")
 
-# Setelah transaksi
+print()  # Spasi antara transaksi dan setelah transaksi
+
+# Memanggil method untuk menampilkan data nasabah setelah transaksi
+print("----------------------")
 print("Setelah transaksi:")
-print("Nasabah 1:")
-print(nasabah1)
-print()
-print("Nasabah 2:")
-print(nasabah2)
+nasabah1.tampilkan_data_nasabah()
+print("----------------------")
+print()  # Spasi antara output Nasabah 1 dan Nasabah 2
+nasabah2.tampilkan_data_nasabah()
+print("----------------------")
