@@ -1,0 +1,63 @@
+from abc import ABC, abstractmethod
+
+# Abstract base class untuk produk
+class Produk(ABC):
+  
+  def __init__(self, nama, harga):
+    self.nama = nama
+    self.harga = harga
+  
+  # Deklarasi abstract method untuk menghitung harga setelah diskon
+  @abstractmethod
+  def hitung_harga_diskon(self, diskon):
+    pass
+
+# Kelas untuk produk elektronik
+class Elektronik(Produk):
+  
+  def __init__(self, nama, harga, watt):
+    super().__init__(nama, harga)
+    self.watt = watt
+  
+  # Implementasi method hitung_harga_diskon untuk produk elektronik
+  def hitung_harga_diskon(self, diskon):
+    harga_diskon = self.harga * (1 - diskon / 100)
+    return harga_diskon
+
+# Kelas untuk produk fashion
+class Fashion(Produk):
+  
+  def __init__(self, nama, harga, size):
+    super().__init__(nama, harga)
+    self.size = size
+  
+  # Implementasi method hitung_harga_diskon untuk produk fashion
+  def hitung_harga_diskon(self, diskon):
+    harga_diskon = self.harga * (1 - diskon / 100)
+    return harga_diskon
+
+# Fungsi utama
+def main():
+  # Buat objek produk
+  elektronik = Elektronik("TV LED", 2000000, 50)
+  fashion = Fashion("Baju Kemeja", 150000, "M")
+
+  # Hitung harga diskon untuk setiap produk (asumsi diskon 10%)
+  harga_diskon_elektronik = elektronik.hitung_harga_diskon(10)
+  harga_diskon_fashion = fashion.hitung_harga_diskon(10)
+
+  # Tampilkan hasil perhitungan
+  print(f"Nama Produk Elektronik: {elektronik.nama}")
+  print(f"Harga Asal: Rp.{elektronik.harga:,}")
+  print(f"Diskon: 10%")
+  print(f"Harga setelah Diskon: Rp.{harga_diskon_elektronik:,.2f}")
+
+  print("\n")
+
+  print(f"Nama Produk Fashion: {fashion.nama}")
+  print(f"Harga Asal: Rp.{fashion.harga:,}")
+  print(f"Diskon: 10%")
+  print(f"Harga setelah Diskon: Rp.{harga_diskon_fashion:,.2f}")
+
+if __name__ == "__main__":
+  main()
